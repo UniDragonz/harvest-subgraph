@@ -1,24 +1,17 @@
 {
   "name": "harvest",
-  "version": "0.1.0",
+  "license": "UNLICENSED",
   "scripts": {
-    "build-contract": "solc contracts/Gravity.sol --abi -o abis --overwrite && solc contracts/Gravity.sol --bin -o bin --overwrite",
-    "create": "graph create alibyte/harvest --node https://api.thegraph.com/deploy/",
-    "create-local": "graph create alibyte/harvest --node http://127.0.0.1:8020",
+    "template": "python3 subgraph.py",
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy alibyte/harvest --ipfs https://api.thegraph.com/ipfs/ --node https://api.thegraph.com/deploy/",
-    "deploy-local": "graph deploy alibyte/harvest --ipfs http://localhost:5001 --node http://127.0.0.1:8020"
-  },
-  "devDependencies": {
-    "@graphprotocol/graph-cli": "^0.18.0",
-    "@graphprotocol/graph-ts": "^0.18.0"
+    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ --ipfs https://api.thegraph.com/ipfs/ axejintao/Pickle",
+    "create-local": "graph create --node http://10.0.0.113:8545/ alibyte/Harvest",
+    "remove-local": "graph remove --node http://localhost:8020/ alibyte/Harvest",
+    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 axejintao/Pickle"
   },
   "dependencies": {
-    "babel-polyfill": "^6.26.0",
-    "babel-register": "^6.26.0",
-    "truffle": "^5.0.4",
-    "truffle-contract": "^4.0.5",
-    "truffle-hdwallet-provider": "^1.0.4"
+    "@graphprotocol/graph-cli": "0.18.0",
+    "@graphprotocol/graph-ts": "^0.18.1"
   }
 }

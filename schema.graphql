@@ -1,6 +1,55 @@
-type Gravatar @entity {
+type Farm @entity {
   id: ID!
-  owner: Bytes!
-  displayName: String!
-  imageUrl: String!
+  "Farm name"
+  name: String!
+  "Share token symbol"
+  symbol: String!
+  "Deposit token"
+  token: Token!
+  "Deposit token per share"
+  ratio: BigInt!
+  "Shares outstanding"
+  balance: BigInt!
+  "Deposit tokens outstanding"
+  totalSupply: BigInt!
+
+  netDeposit: BigInt!
+  grossDeposit: BigInt!
+  grossWithdraw: BigInt!
+}
+
+type User @entity {
+  id: ID!
+  farmBalances: [UserfarmBalance!]! @derivedFrom(field: "user")
+
+  balance: BigInt!
+  staked: BigInt!
+  stakingRewards: BigInt!
+}
+
+type UserfarmBalance @entity {
+  id: ID!
+  farm: Farm!
+  user: User!
+
+  netDeposit: BigInt!
+  grossDeposit: BigInt!
+  grossWithdraw: BigInt!
+}
+
+type RewardContract @entity {
+  id: ID!
+  currentRewards: BigInt!
+  totalRewards: BigInt!
+  stakedTokens: BigInt!
+  stakingToken: Bytes!
+  stakingTokenTotalSupply: BigInt!
+}
+
+type Token @entity {
+  id: ID!
+  decimals: BigInt!
+  name: String!
+  symbol: String!
+  totalSupply: BigInt!
 }

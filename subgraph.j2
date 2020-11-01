@@ -1,0 +1,67 @@
+specVersion: 0.0.1
+description: $FARM Token Contracts
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: staking
+    network: mainnet
+    source:
+      address: "0x25550Cccbd68533Fa04bFD3e3AC4D09f9e00Fc50"
+      abi: StakingContract
+      startBlock: 10957909
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - ForceGreylistExited
+        - SmartContractDenied
+        - SmartContractRecorded
+        - Staked
+        - StakingDenied
+        - Withdrawn
+      abis:
+        - name: StakingContract
+          file: ./abis/StakingContract.json
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: ForceGreylistExited(indexed address,uint256)
+          handler: handleForceGreylistExited
+        - event: SmartContractDenied(indexed address)
+          handler: handleSmartContractDenied
+        - event: SmartContractRecorded(indexed address,indexed address)
+          handler: handleSmartContractRecorded
+        - event: Staked(indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleStaked
+        - event: StakingDenied(indexed address,uint256)
+          handler: handleStakingDenied
+        - event: Withdrawn(indexed address,uint256)
+          handler: handleWithdrawn
+      file: ./src/staking.ts
+  {% for contract in contracts %}
+  - kind: ethereum/contract
+    name: {{ contract.name }}
+    network: mainnet
+    source:
+      address: "{{ contract.address }}"
+      abi: Farms
+      startBlock: {{ contract.startBlock }}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Upgraded
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: Farms
+          file: ./abis/Farms.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: Upgraded
+      file: ./src/Farms.ts
+  {% endfor %}

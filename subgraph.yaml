@@ -1,27 +1,331 @@
 specVersion: 0.0.2
-description: Gravatar for Ethereum
-repository: https://github.com/graphprotocol/example-subgraph
+description: $FARM Token Contracts
 schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: Gravity
+    name: staking
     network: mainnet
     source:
-      address: '0x2E645469f354BB4F5c8a05B3b30A929361cf77eC'
-      abi: Gravity
+      address: "0x25550Cccbd68533Fa04bFD3e3AC4D09f9e00Fc50"
+      abi: StakingContract
+      startBlock: 10957909
     mapping:
       kind: ethereum/events
-      apiVersion: 0.0.3
+      apiVersion: 0.0.4
       language: wasm/assemblyscript
       entities:
-        - Gravatar
+        - ForceGreylistExited
+        - SmartContractDenied
+        - SmartContractRecorded
+        - Staked
+        - StakingDenied
+        - Withdrawn
       abis:
-        - name: Gravity
-          file: ./abis/Gravity.json
+        - name: StakingContract
+          file: ./abis/StakingContract.json
+        - name: ERC20
+          file: ./abis/ERC20.json
       eventHandlers:
-        - event: NewGravatar(uint256,address,string,string)
-          handler: handleNewGravatar
-        - event: UpdatedGravatar(uint256,address,string,string)
-          handler: handleUpdatedGravatar
-      file: ./src/mapping.ts
+        - event: ForceGreylistExited(indexed address,uint256)
+          handler: handleForceGreylistExited
+        - event: SmartContractDenied(indexed address)
+          handler: handleSmartContractDenied
+        - event: SmartContractRecorded(indexed address,indexed address)
+          handler: handleSmartContractRecorded
+        - event: Staked(indexed address,uint256,uint256,uint256,uint256,uint256)
+          handler: handleStaked
+        - event: StakingDenied(indexed address,uint256)
+          handler: handleStakingDenied
+        - event: Withdrawn(indexed address,uint256)
+          handler: handleWithdrawn
+      file: ./src/staking.ts
+  
+  - kind: ethereum/contract
+    name: USDT
+    network: mainnet
+    source:
+      address: "0x053c80eA73Dc6941F518a68E2FC52Ac45BDE7c9C"
+      abi: Farms
+      startBlock: 11086849
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Upgraded
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: Farms
+          file: ./abis/Farms.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: Upgraded
+      file: ./src/Farms.ts
+  
+  - kind: ethereum/contract
+    name: WBTC
+    network: mainnet
+    source:
+      address: "0x5d9d25c7C457dD82fc8668FFC6B9746b674d4EcB"
+      abi: Farms
+      startBlock: 11068089
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Upgraded
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: Farms
+          file: ./abis/Farms.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: Upgraded
+      file: ./src/Farms.ts
+  
+  - kind: ethereum/contract
+    name: WETH-DAI-LP
+    network: mainnet
+    source:
+      address: "0x307E2752e8b8a9C29005001Be66B1c012CA9CDB7"
+      abi: Farms
+      startBlock: 11041674
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Upgraded
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: Farms
+          file: ./abis/Farms.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: Upgraded
+      file: ./src/Farms.ts
+  
+  - kind: ethereum/contract
+    name: RENBTC
+    network: mainnet
+    source:
+      address: "0xC391d1b08c1403313B0c28D47202DFDA015633C4"
+      abi: Farms
+      startBlock: 11086855
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Upgraded
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: Farms
+          file: ./abis/Farms.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: Upgraded
+      file: ./src/Farms.ts
+  
+  - kind: ethereum/contract
+    name: USDC
+    network: mainnet
+    source:
+      address: "0xf0358e8c3CD5Fa238a29301d0bEa3D63A17bEdBE"
+      abi: Farms
+      startBlock: 11086842
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Upgraded
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: Farms
+          file: ./abis/Farms.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: Upgraded
+      file: ./src/Farms.ts
+  
+  - kind: ethereum/contract
+    name: WETH-WBTC-LP
+    network: mainnet
+    source:
+      address: "0x01112a60f427205dcA6E229425306923c3Cc2073"
+      abi: Farms
+      startBlock: 11041683
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Upgraded
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: Farms
+          file: ./abis/Farms.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: Upgraded
+      file: ./src/Farms.ts
+  
+  - kind: ethereum/contract
+    name: DAI
+    network: mainnet
+    source:
+      address: "0xab7fa2b2985bccfc13c6d86b1d5a17486ab1e04c"
+      abi: Farms
+      startBlock: 11086832
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Upgraded
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: Farms
+          file: ./abis/Farms.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: Upgraded
+      file: ./src/Farms.ts
+  
+  - kind: ethereum/contract
+    name: WETH-USDT-LP
+    network: mainnet
+    source:
+      address: "0x7DDc3ffF0612E75Ea5ddC0d6Bd4e268f70362Cff"
+      abi: Farms
+      startBlock: 11011433
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Upgraded
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: Farms
+          file: ./abis/Farms.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: Upgraded
+      file: ./src/Farms.ts
+  
+  - kind: ethereum/contract
+    name: WETH
+    network: mainnet
+    source:
+      address: "0xFE09e53A81Fe2808bc493ea64319109B5bAa573e"
+      abi: Farms
+      startBlock: 11086824
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Upgraded
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: Farms
+          file: ./abis/Farms.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: Upgraded
+      file: ./src/Farms.ts
+  
+  - kind: ethereum/contract
+    name: TUSD
+    network: mainnet
+    source:
+      address: "0x7674622c63Bee7F46E86a4A5A18976693D54441b"
+      abi: Farms
+      startBlock: 10997721
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Upgraded
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: Farms
+          file: ./abis/Farms.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: Upgraded
+      file: ./src/Farms.ts
+  
+  - kind: ethereum/contract
+    name: CRVRENBTC
+    network: mainnet
+    source:
+      address: "0x9aA8F427A17d6B0d91B6262989EdC7D45d6aEdf8"
+      abi: Farms
+      startBlock: 11086865
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Upgraded
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: Farms
+          file: ./abis/Farms.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: Upgraded
+      file: ./src/Farms.ts
+  
+  - kind: ethereum/contract
+    name: WETH-USDC-LP
+    network: mainnet
+    source:
+      address: "0xA79a083FDD87F73c2f983c5551EC974685D6bb36"
+      abi: Farms
+      startBlock: 11041667
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.4
+      language: wasm/assemblyscript
+      entities:
+        - Approval
+        - Upgraded
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+        - name: Farms
+          file: ./abis/Farms.json
+      eventHandlers:
+        - event: Upgraded(indexed address)
+          handler: Upgraded
+      file: ./src/Farms.ts
+  

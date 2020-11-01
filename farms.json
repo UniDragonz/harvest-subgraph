@@ -1,0 +1,62 @@
+{
+  "WETH": {
+    "name": "WETH",
+    "address": "0xFE09e53A81Fe2808bc493ea64319109B5bAa573e",
+    "startBlock": 11086824
+  },
+  "DAI": {
+    "name": "DAI",
+    "address": "0xab7fa2b2985bccfc13c6d86b1d5a17486ab1e04c",
+    "startBlock": 11086832
+  },
+  "USDC": {
+    "name": "USDC",
+    "address": "0xf0358e8c3CD5Fa238a29301d0bEa3D63A17bEdBE",
+    "startBlock": 11086842
+  },
+  "USDT": {
+    "name": "USDT",
+    "address": "0x053c80eA73Dc6941F518a68E2FC52Ac45BDE7c9C",
+    "startBlock": 11086849
+  },
+  "TUSD": {
+    "name": "TUSD",
+    "address": "0x7674622c63Bee7F46E86a4A5A18976693D54441b",
+    "startBlock": 10997721
+  },
+  "WBTC": {
+    "name": "WBTC",
+    "address": "0x5d9d25c7C457dD82fc8668FFC6B9746b674d4EcB",
+    "startBlock": 11068089
+  },
+  "RENBTC": {
+    "name": "RENBTC",
+    "address": "0xC391d1b08c1403313B0c28D47202DFDA015633C4",
+    "startBlock": 11086855
+  },
+  "CRVRENBTC": {
+    "name": "CRVRENBTC",
+    "address": "0x9aA8F427A17d6B0d91B6262989EdC7D45d6aEdf8",
+    "startBlock": 11086865
+  },
+  "WETH-DAI-LP": {
+    "name": "WETH-DAI-LP",
+    "address": "0x307E2752e8b8a9C29005001Be66B1c012CA9CDB7",
+    "startBlock": 11041674
+  },
+  "WETH-USDC-LP": {
+    "name": "WETH-USDC-LP",
+    "address": "0xA79a083FDD87F73c2f983c5551EC974685D6bb36",
+    "startBlock": 11041667
+  },
+  "WETH-USDT-LP": {
+    "name": "WETH-USDT-LP",
+    "address": "0x7DDc3ffF0612E75Ea5ddC0d6Bd4e268f70362Cff",
+    "startBlock": 11011433
+  },
+  "WETH-WBTC-LP": {
+    "name": "WETH-WBTC-LP",
+    "address": "0x01112a60f427205dcA6E229425306923c3Cc2073",
+    "startBlock": 11041683
+  }
+}
