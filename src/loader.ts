@@ -1,8 +1,7 @@
 import { Address, BigInt } from '@graphprotocol/graph-ts';
 import { User, Jar, RewardContract, UserJarBalance, Token } from '../generated/schema';
 import { StakingContract } from '../generated/staking/StakingContract'
-import { PickleJar } from '../generated/sCRVv1/PickleJar'
-import { ERC20 } from '../generated/staking/ERC20'
+import { PickleJar } from '../generated/CRVRENBTC/ERC20'
 import { ZERO, NO_ADDR } from './constants';
 
 export function getOrCreateUser(address: Address): User {
